@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <title>Coverage</title>
+
+  <link rel="stylesheet" href="http://blanketjs.org/test/vendor/jasmine.css">
+  <script src="http://blanketjs.org/test/vendor/jasmine.js"></script>
+  <script src="http://blanketjs.org/test/vendor/jasmine-html.js"></script>
+  <script src="http://blanketjs.org/dist/jasmine/blanket_jasmine.min.js" data-cover-only="js/"></script>
+  <script src="http://blanketjs.org/test/helpers/console_runner.js"></script>
+  
+  <!-- ################################################################## -->
+  <!-- ################################################################## -->
+  <!-- ################################################################## -->
+ <!-- include source files here... -->
+  <script type="text/javascript" src="js/coach.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="spec/app.spec.js"></script>
+
+  <!-- please make sure the source folder is js/ ... if not, change it at line 11 -->
+
+  <!-- include source files here... -->
+
+  <!-- include spec files here... -->
+
+  <!-- ################################################################## -->
+  <!-- ################################################################## -->
+  <!-- ################################################################## -->
+
+  <script>
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+      /* this is just for our automated tests */
+      window.jasmine_phantom_reporter = new jasmine.ConsoleReporter;
+      jasmineEnv.addReporter(jasmine_phantom_reporter);
+      /*   */
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+
+</head>
+
+<body>
+</body>
+</html>

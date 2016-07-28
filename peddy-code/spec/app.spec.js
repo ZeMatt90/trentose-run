@@ -1,16 +1,18 @@
 describe("App", function() {
     
+    beforeEach(function() {
+        Coach._reset();
+     });
+    
     it('should not track an activity', function() {
         var value = Coach.track("walk",10);
         expect(value).toBeNull();
     });
     
-    
     it('should not start a non-existing program', function() {
         var value = Coach.start('fake');
         expect(value).toBeFalsy();
     });
-    
     
     it('should start an existing program', function() {
         var value = Coach.start('crazy');
@@ -18,11 +20,13 @@ describe("App", function() {
     });
 
     it('should not track an activity', function() {
+        Coach.start('crazy');
         var value = Coach.track("fake",10);
         expect(value).toBeNull();
     });
     
     it('should track an activity', function() {
+        Coach.start('crazy');
         var value = Coach.track("walk",10);
         expect(value).toBe(500);
     });
